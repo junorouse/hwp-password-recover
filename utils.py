@@ -20,15 +20,6 @@ class AESCipher:
         return cipher.decrypt(enc)
 
 
-from pwn import *
-
-pwd = "e7fe06eb0b552a1631fa8df303f8b61a".decode("hex")
-
-pwd = "40fc1ff828306c3ab4efc6df53939455".decode("hex")
-
-# data = open("mymem","rb").read()
-# data = open("final_data","rb").read()
-
 def gogo(pwd, data, is_encrypt=True):
     final_data = ''
     TMP_IN = bytearray(16)
@@ -43,7 +34,6 @@ def gogo(pwd, data, is_encrypt=True):
 
             OUT = AESCipher(pwd).encrypt(str(TMP_IN))
 
-            # OUT = u32(OUT[:4])
             OUT = ord(OUT[0])
 
             ff = i & 7;
@@ -93,13 +83,10 @@ def gogo(pwd, data, is_encrypt=True):
 
 if __name__ == '__main__':
     pwd = "40fc1ff828306c3ab4efc6df53939455".decode("hex")
-
-    # pwd = genkey(raw_input("password: ").strip())
-
     pwd = genkey("asdfasdf")
 
-    # enc = gogo(pwd, pad(raw_input("input: ").strip()))
-    # print "enc: ", enc.encode("hex")
+    enc = gogo(pwd, pad(raw_input("input: ").strip()))
+    print "enc: ", enc.encode("hex")
     plain = gogo(pwd, open("wowmem").read(), False)
     print "plain: ", plain.encode("hex")
 

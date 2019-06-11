@@ -1,14 +1,11 @@
 import zlib
-
-from c import decompress_gen, decompress
-from utils import gogo, pad
-from password import genkey
 import StringIO
 import olefile
+from string import ascii_lowercase
 from os import _exit
 
-from string import ascii_lowercase
-
+from utils import gogo, pad
+from password import genkey
 from hwp import unlock_hwp
 
 ole = olefile.OleFileIO("password_crack_test.hwp")
